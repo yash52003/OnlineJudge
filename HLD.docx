@@ -8,28 +8,29 @@ Problem Management
 Code Submission and Evaluation
 Leaderboard Display
 Competition Functionality (Phase 2)
-Database Models
-Problem
 
+Database Models
+
+`1.) - Problem
 Attributes:
 ProblemStatement: String
 Name: String
 Code: String
 Difficulty: Enum (Hard, Easy, Medium)
-Solution
 
+2.) - Solution
 Attributes:
 Problem: Reference to Problem
 Verdict: Enum (Accepted, Wrong Answer, Runtime Error, Compilation Error)
 SubmittedAt: DateTime (auto-generated)
-TestCase
 
+3.) - TestCase
 Attributes:
 Problem: Reference to Problem
 Input: String
 Output: String
-User
 
+4.) - User
 Attributes:
 UserId: String
 Password: String
@@ -38,9 +39,9 @@ DOB: String
 FirstName: String
 LastName: String
 ProblemList: Array of references to Problem
+
 UI Screens
 Login / Signup
-
 Components: LoginForm, SignupForm
 Routes: /login, /signup
 Dashboard
@@ -75,7 +76,7 @@ Endpoint: /api/problems/:id
 Backend: Route to handle fetching a specific problem
 Controller Function: Get problem details by ID and return
 Submit Code
-
+ 
 Frontend: POST request to submit code
 Method: POST
 Endpoint: /api/solutions
