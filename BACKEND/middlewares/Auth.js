@@ -45,6 +45,43 @@ exports.auth = async (req , res , next) => {
 
 //To decode the jwt token that we have send to the user response at the time of login we do it using the jwt.sign() method and to decode it we use the jwt.verify() method
 
+//For the authorisation part also we will need to write the middleware 
+//isAdmin
+exports.isAdmin = (req , res , next) => {
+    try{
+        if(req.user.role !== "Admin"){
+            return res.status(401).json({
+                success : false,
+                message : "This is the protected route for the Admins only"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            success : false,
+            message : "User role cannot be verified , please try again",
+        });
+    }
+    //Call the next handler function
+    next();
+}
+
+exports.isUser = (req , res , next) => {
+    try{
+        if(req.user.role !== "User"){
+            return res.status(401).json({
+                success : false,
+                message : "This is the protected route for the Admins only"
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            success : false,
+            message : "User role cannot be verified , please try again",
+        });
+    }
+    //Call the next handler function
+    next();
+}
 
 
 
