@@ -17,6 +17,12 @@ const userSchema = new mongoose.Schema({
         required:true,
     },
 
+    role:{
+        type:String,
+        enum: ['Admin' , 'User'],
+        required:true,
+    },
+
     ProblemList: [
         {
             type : mongoose.Schema.Types.ObjectId,
