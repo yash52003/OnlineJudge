@@ -1,7 +1,8 @@
 //I want to write the login and signup handler functions for authentication 
-
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 exports.signup = async (req , res) => {
     try{
@@ -132,7 +133,7 @@ exports.login = async (req , res) => {
                 user,
                 message : "User logged in Successfully",
             })
-            
+
 
         }else{
             //If the password doesn't matches 
