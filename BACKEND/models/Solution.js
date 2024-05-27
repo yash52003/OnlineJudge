@@ -14,6 +14,11 @@ const solutionSchema = new mongoose.Schema({
         ref : "Problem",
     },
 
+    code:{
+        type: String,
+        required : true,
+    },
+
     verdict: {
         type : String,
         enum: ['Accepted' , 'Wrong Answer' , 'Runtime Error' , 'Compilation Error'],

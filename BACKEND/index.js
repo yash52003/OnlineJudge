@@ -22,8 +22,11 @@ require("./config/database").connect();
 const user = require("./routes/User");
 app.use("/api/v1" , user);
 
-//Making theapplisten on the PORT
+//Mouting the main route for the problem
+const problemRoutes = require("./routes/Problem");
+app.use("/api/v1/problems" , problemRoutes);
 
+//Making theapplisten on the PORT
 app.listen(PORT , () => {
     console.log(`App is listening at the PORT ${PORT}`)
 })

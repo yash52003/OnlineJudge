@@ -13,10 +13,12 @@ const problemSchema = new mongoose.Schema({
         required: true,
     },
 
-    code:{
-        type: String,
-        required : true,
-    },
+    testCases : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Testcase",
+        }
+    ],
 
     difficulty:{
         type: String,
