@@ -42,11 +42,11 @@ exports.auth = async (req , res , next) => {
 
 }
 
-
 //To decode the jwt token that we have send to the user response at the time of login we do it using the jwt.sign() method and to decode it we use the jwt.verify() method
 
 //For the authorisation part also we will need to write the middleware 
 //isAdmin
+
 exports.isAdmin = (req , res , next) => {
     try{
         if(req.user.role !== "Admin"){

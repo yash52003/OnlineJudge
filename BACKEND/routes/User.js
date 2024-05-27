@@ -8,12 +8,12 @@ const {auth , isAdmin , isUser } = require("../middlewares/Auth");
 router.post("/login" , login);
 router.post("/signup" , signup);
 
-router.get("/loggedIn" , auth , (req , res) => {
-    res.json({
-        success : true,
-        message : "Welcome you are successfully logged in and can access the courses Now",
-    })
-})
+// router.get("/loggedIn" , auth , (req , res) => {
+//     res.json({
+//         success : true,
+//         message : "Welcome you are successfully logged in and can access the courses Now",
+//     })
+// })
 
 router.get("/user" , auth , isUser , (req , res) => {
     res.json({
