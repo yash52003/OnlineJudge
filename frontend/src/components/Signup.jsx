@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import instance from './api';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -20,7 +20,7 @@ const Signup = () => {
     console.log('Role:', role);
 
     try {
-      const response = await axios.post('http://localhost:4000/api/v1/signup', {
+      const response = await instance.post('/api/v1/signup', {
         name,
         email,
         password,
