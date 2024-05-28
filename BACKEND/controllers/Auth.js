@@ -153,3 +153,11 @@ exports.login = async (req , res) => {
 }
 
 //for the signup and login functionalities we need the interaction with the database therefore it will be asynchronouse function
+
+//Writing the logout handler function
+exports.logout = (req, res) => {
+    res.clearCookie("token").status(200).json({
+        success: true,
+        message: "User logged out successfully",
+    });
+};

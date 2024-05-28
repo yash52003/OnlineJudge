@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 
-const {login , signup} = require("../controllers/Auth");
+const {login , signup , logout} = require("../controllers/Auth");
 const {auth , isAdmin , isUser } = require("../middlewares/Auth");
 
 router.post("/login" , login);
 router.post("/signup" , signup);
+router.post("/logout", logout);
 
 // router.get("/loggedIn" , auth , (req , res) => {
 //     res.json({

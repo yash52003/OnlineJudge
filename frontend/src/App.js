@@ -6,6 +6,9 @@ import Signup from './components/Signup';
 import Homepage from './components/Homepage'
 import React from "react"
 import Dashboard from './components/Dashboard';
+import AddProblem from './components/AddProblem';
+import { useState, useEffect } from "react";
+import instance from '../src/components/api';
 
 function App() {
   return (
@@ -15,6 +18,7 @@ function App() {
         <Route path = "/login" element={<Login />}/>
         <Route path = "/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/add-problem" element={<AddProblem />} />
       </Routes>
     </Router>
   );
