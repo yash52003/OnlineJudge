@@ -16,7 +16,7 @@ const problemSchema = new mongoose.Schema({
     testCases : [
         {
             type : mongoose.Schema.Types.ObjectId,
-            ref : "Testcase",
+            ref : "TestCase",
         }
     ],
 

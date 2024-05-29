@@ -1,6 +1,7 @@
 const Problem = require('../models/Problem');
 const Solution = require('../models/Solution');
 const TestCase = require("../models/TestCase");
+const mongoose = require("mongoose");
 
 // Get all problems with user status (solved/not solved)
 exports.getAllProblemsWithUserStatus = async (req, res) => {
@@ -115,7 +116,8 @@ exports.deleteProblem = async (req, res) => {
 // Get a single problem by ID
 exports.getProblemById = async (req, res) => {
   try {
-    const problem = await Problem.findById(req.params.id).populate('testCases');
+    const problemId = req.params.id.trim(); // Trim the ID to remove any extra whitespace or newlines
+    const problem = await Problem.findById(problemId).populate('testCases');
 
     if (!problem) {
       return res.status(404).json({
@@ -136,6 +138,7 @@ exports.getProblemById = async (req, res) => {
     });
   }
 };
+
 
 //Update the existing problem based on the Id
 exports.updateProblem = async (req, res) => {

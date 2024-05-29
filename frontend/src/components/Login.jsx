@@ -17,7 +17,7 @@ const Login = () => {
         const { token, user } = response.data;
         // Store the token in local storage or cookies
         localStorage.setItem('token', token);
-        
+
         // Redirect to appropriate dashboard based on the role
         if (user.role === 'Admin') {
           navigate('/adminDashboard');
@@ -28,7 +28,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      setError(error + 'Invalid credentials, please try again.');
+      setError('Invalid credentials, please try again.');
     }
   };
 

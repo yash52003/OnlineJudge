@@ -50,6 +50,7 @@ function EditProblem() {
         problemStatement,
         difficulty,
         testCases,
+        token,
       };
 
       const headers = {
@@ -59,7 +60,7 @@ function EditProblem() {
 
       await instance.put(`/api/v2/updateProblem/${id}`, updatedProblem, { headers });
 
-      navigate('/admin-dashboard');
+      navigate('/adminDashboard');
     } catch (error) {
       console.error('Failed to update problem', error);
     }
