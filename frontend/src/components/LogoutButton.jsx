@@ -1,7 +1,7 @@
 // src/components/LogoutButton.js
 
 import React from 'react';
-import instance from '../api'; // Adjusted import path
+import instance from './api'; // Adjusted import path
 import { useNavigate } from 'react-router-dom';
 
 const LogoutButton = () => {

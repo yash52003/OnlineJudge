@@ -67,7 +67,6 @@ exports.signup = async (req , res) => {
     }
 }
 
-
 //Step2 - now need to write the login handler function
 exports.login = async (req , res) => {
     try{
@@ -132,7 +131,7 @@ exports.login = async (req , res) => {
                 token,
                 user,
                 message : "User logged in Successfully",
-            })
+            });
 
 
         }else{
@@ -151,8 +150,6 @@ exports.login = async (req , res) => {
         });
     }
 }
-
-//for the signup and login functionalities we need the interaction with the database therefore it will be asynchronouse function
 
 //Writing the logout handler function
 exports.logout = (req, res) => {

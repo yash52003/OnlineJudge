@@ -12,13 +12,23 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await instance.post('/api/v1/login', { email, password });
-      console.log(response.data);
+
       if (response.data.success) {
-        // Redirect to dashboard or homepage
-        navigate('/dashboard');
+        const { token, user } = response.data;
+        // Store the token in local storage or cookies
+        localStorage.setItem('token', token);
+        
+        // Redirect to appropriate dashboard based on the role
+        if (user.role === 'Admin') {
+          navigate('/adminDashboard');
+        } else {
+          navigate('/userDashboard');
+        }
+
       }
     } catch (error) {
-      setError('Invalid credentials, please try again.');
+      console.log(error);
+      setError(error + 'Invalid credentials, please try again.');
     }
   };
 

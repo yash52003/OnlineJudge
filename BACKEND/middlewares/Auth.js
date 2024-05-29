@@ -7,8 +7,11 @@ exports.auth = async (req , res , next) => {
         
         //Step1 -Extract the token ('There are 3 possible ways of sending the token and we have send the token in any of those possible ways')
         //Cookie , body , bearerToken
-        const token = req.cookies.token || req.body.token || req.header("Authorisation").replace("Bearer " , "");
-
+        // console.log(req.body);
+        // console.log(req.header("Authorization").replace("Bearer " , ""));
+    
+        const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer " , "");
+        console.log(token);
         //If the token is missing return the response
         if(!token){
             return res.status(401).json({
@@ -19,7 +22,9 @@ exports.auth = async (req , res , next) => {
 
         //If we have the token then just verify it.We verify the token on the basis of the SECRET_KEY that we used at the time of signing
         try{
+            console.log(process.env.JWT_SECRET);
             const decode = await jwt.verify(token , process.env.JWT_SECRET);
+            console.log("hii")
             console.log(decode);
             req.user = decode;
         }catch(error){
