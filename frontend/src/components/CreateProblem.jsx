@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import instance from './api';
-import Cookies from 'js-cookie'; // Import js-cookie
 
 function CreateProblem() {
   const [problemName, setProblemName] = useState('');
