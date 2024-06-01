@@ -1,39 +1,26 @@
 const Solution = require("../models/Solution");
 const Problem = require("../models/Problem");
 const TestCase = require("../models/TestCase");
+const {generateFile} = require("../services/generateFile");
+const {executeCpp} = require("../scripts/executeCpp");
+const {executePython} = require("../scripts/executePython");
+const {executeJava} = require("../scripts/executeJava");
+const fs = require("fs");
+const path = require("path");
 
-//Writing the create solution handler
 exports.solveProblem = async (req , res) => {
     try{
-        //Get the data from the Request Body
-        const {user , problem , code} = req.body;
+        const {language , code} = req.body;
+        const { id:problemId } = req.params;
+        const userId = req.user._id;
 
-        //Validate the user and the problem existence
-        const existingUser = await User.findById(user);
-        const existingProblem = await Problem.findById(problem);
-        if(!existingUser || !existingProblem){
+        if(!code || !language){
             return res.status(400).json({
                 success : false,
-                message : "User or problem not found",
-            });
+                error : "Code or language is missing",
+            })
         }
 
-        const newSolution = new Solution({user , problem , code});
-        //Saving the entry in the DB
-        await newSolution.save();
-
-        res.status(201).json({
-        
-        })
-
-    }catch(error){
-
     }
+
 }
-
-
-//Writing the get all solutions handler
-
-
-
-//Verify the Solution

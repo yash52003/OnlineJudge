@@ -38,4 +38,6 @@ router.get('/getProblem/:id', getProblemById);
 //update the problem according to the id 
 router.put('/updateProblem/:id', updateProblem);
 
+router.post
+
 module.exports = router;
