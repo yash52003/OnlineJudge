@@ -139,7 +139,6 @@ exports.getProblemById = async (req, res) => {
   }
 };
 
-
 //Update the existing problem based on the Id
 exports.updateProblem = async (req, res) => {
   const session = await mongoose.startSession();

@@ -14,6 +14,8 @@ const {
     getProblemById,
 } = require("../controllers/Problems");
 
+const { submitSolution } = require("../controllers/Solution");
+
 //Importing the middlewares
 const { auth, isAdmin } = require("../middlewares/Auth");
 
@@ -38,6 +40,7 @@ router.get('/getProblem/:id', getProblemById);
 //update the problem according to the id 
 router.put('/updateProblem/:id', updateProblem);
 
-router.post
+//Submit the solution by the id
+router.post('/submitSolution/:id', auth, submitSolution);
 
 module.exports = router;

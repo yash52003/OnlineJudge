@@ -2,14 +2,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 exports.auth = async (req , res , next) => {
-    try{
-        //If the user is been loggen in we have returned a cookie with a token of the payload to him using that we are doing the authentication and the authorisation
-        
-        //Step1 -Extract the token ('There are 3 possible ways of sending the token and we have send the token in any of those possible ways')
-        //Cookie , body , bearerToken
-        // console.log(req.body);
-        // console.log(req.header("Authorization").replace("Bearer " , ""));
-    
+    try{   
         const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer " , "");
         console.log(token);
         //If the token is missing return the response
@@ -24,7 +17,6 @@ exports.auth = async (req , res , next) => {
         try{
             console.log(process.env.JWT_SECRET);
             const decode = await jwt.verify(token , process.env.JWT_SECRET);
-            console.log("hii")
             console.log(decode);
             req.user = decode;
         }catch(error){
@@ -32,7 +24,7 @@ exports.auth = async (req , res , next) => {
             return res.status(401).json({
                 success : false,
                 message : "Token is Invalid",
-            })
+            });
         }
 
         next();
@@ -46,11 +38,6 @@ exports.auth = async (req , res , next) => {
     }
 
 }
-
-//To decode the jwt token that we have send to the user response at the time of login we do it using the jwt.sign() method and to decode it we use the jwt.verify() method
-
-//For the authorisation part also we will need to write the middleware 
-//isAdmin
 
 exports.isAdmin = (req , res , next) => {
     try{
