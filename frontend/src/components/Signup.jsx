@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiArrowLeft } from 'react-icons/fi';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import instance from './api';
 
 const Signup = () => {
@@ -8,16 +11,20 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('User');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleSignupSuccess = () => {
+    toast.success('Account created successfully');
+  };
+
+  const handleSignupError = (message) => {
+    toast.error(`Failed to create account: ${message}`);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log('Form submitted with the following details:');
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Role:', role);
+    setIsLoading(true);
 
     try {
       const response = await instance.post('/api/v1/signup', {
@@ -26,43 +33,45 @@ const Signup = () => {
         password,
         role,
       });
-
-      console.log('Response:', response.data);
+      console.log(response);
 
       if (response.data.success) {
-        console.log('Created the account successfully');
+        handleSignupSuccess();
         navigate('/login');
       }
     } catch (error) {
       console.error('Error:', error);
-      if (error.response) {
-        console.error('Response data:', error.response.data);
-        console.error('Response status:', error.response.status);
-        console.error('Response headers:', error.response.headers);
-      } else if (error.request) {
-        console.error('Request data:', error.request);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      setError('Failed to create account, please try again');
+      const errorMessage = error.response?.data?.message || 'Failed to create account, please try again';
+      setError(errorMessage);
+      handleSignupError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
+  };
+
+  const redirectToHomepage = () => {
+    navigate('/');
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="absolute top-4 left-4 cursor-pointer text-green-gradient" onClick={redirectToHomepage}>
+        <FiArrowLeft size={24} />
+      </div>
       <form className="bg-white p-8 rounded shadow-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-bold mb-6">Signup</h2>
-        {error && <p className="text-red-500">{error}</p>}
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Welcome to the Signup Page</h2>
+        {error && (
+          <p className="text-red-500 mb-4 text-center">
+            {error}
+          </p>
+        )}
 
         <div className="mb-4">
           <label className="block text-gray-700">Name:</label>
           <input
             type="text"
             value={name}
-            onChange={(e) => {
-              console.log('Name input changed:', e.target.value);
-              setName(e.target.value);
-            }}
+            onChange={(e) => setName(e.target.value)}
             className="w-full px-3 py-2 border rounded"
             required
           />
@@ -73,10 +82,7 @@ const Signup = () => {
           <input
             type="email"
             value={email}
-            onChange={(e) => {
-              console.log('Email input changed:', e.target.value);
-              setEmail(e.target.value);
-            }}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-3 py-2 border rounded"
             required
           />
@@ -87,10 +93,7 @@ const Signup = () => {
           <input
             type="password"
             value={password}
-            onChange={(e) => {
-              console.log('Password input changed:', e.target.value);
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full px-3 py-2 border rounded"
             required
           />
@@ -100,10 +103,7 @@ const Signup = () => {
           <label className="block text-gray-700">Role:</label>
           <select
             value={role}
-            onChange={(e) => {
-              console.log('Role selected:', e.target.value);
-              setRole(e.target.value);
-            }}
+            onChange={(e) => setRole(e.target.value)}
             className="w-full px-3 py-2 border rounded"
           >
             <option value="User">User</option>
@@ -112,7 +112,7 @@ const Signup = () => {
         </div>
 
         <button type="submit" className="w-full bg-green-500 text-white px-3 py-2 rounded">
-          Signup
+          {isLoading ? 'Signing up...' : 'Signup'}
         </button>
       </form>
     </div>

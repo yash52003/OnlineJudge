@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import instance from './api'; // Ensure this is the correct path to your axios instance
 import Select from 'react-select';
 import AceEditor from 'react-ace';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 // Import the desired theme and language mode for syntax highlighting
 import 'ace-builds/src-noconflict/theme-dracula';
@@ -11,9 +12,9 @@ import 'ace-builds/src-noconflict/mode-java';
 import 'ace-builds/src-noconflict/mode-python';
 
 const languageOptions = [
-  { value: 'cpp', label: 'C++' },
   { value: 'java', label: 'Java' },
   { value: 'python', label: 'Python' },
+  { value: 'cpp', label: 'C++' },
 ];
 
 function SolveProblem() {
@@ -24,6 +25,7 @@ function SolveProblem() {
   const [language, setLanguage] = useState(languageOptions[0]);
   const [verdict, setVerdict] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProblem = async () => {
@@ -40,6 +42,7 @@ function SolveProblem() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
 
@@ -50,7 +53,6 @@ function SolveProblem() {
       const response = await instance.post(`/api/v2/submitSolution/${id}`, {
         code: solution,
         language: language.value,
-        token,
       }, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -58,13 +60,25 @@ function SolveProblem() {
       });
 
       if (response.data.success) {
-        setVerdict({ message: response.data.finalVerdict, color: response.data.finalVerdict === 'Accepted' ? 'green' : 'red' });
+        if (response.data.finalVerdict === 'Accepted') {
+          setVerdict({ message: 'Accepted', color: 'green' });
+        } else if (response.data.finalVerdict === 'Wrong Answer') {
+          setVerdict({ message: `Wrong Answer: Failed on test case ${response.data.failedTestCase}`, color: 'red' });
+        } else {
+          setVerdict({ message: response.data.finalVerdict || 'Incorrect Code', color: 'red' });
+        }
       } else {
-        setVerdict({ message: response.data.message || 'Incorrect', color: 'red' });
+        if (response.data.failedTestCase !== null) {
+          setVerdict({ message: `Failed on test case ${response.data.failedTestCase}`, color: 'red' });
+        } else {
+          setVerdict({ message: `${response.data.message || 'Incorrect Code'}, Failed on test case`, color: 'red' });
+        }
       }
     } catch (error) {
       console.error('Failed to submit solution', error);
-      setVerdict({ message: 'Compilation Error', color: 'red' });
+      setVerdict({ message: 'Incorrect Code', color: 'red' });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,7 +87,11 @@ function SolveProblem() {
   }
 
   if (!problem) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <ClipLoader color="#4A90E2" loading={true} size={35} />
+      </div>
+    );
   }
 
   return (
@@ -90,7 +108,7 @@ function SolveProblem() {
       <main className="flex-grow container mx-auto p-4 flex">
         <div className="w-1/2 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4">{problem.problemName}</h2>
-          <p className="mb-4">{problem.problemStatement}</p>
+          <p className="mb-4 whitespace-pre-wrap">{problem.problemStatement}</p>
         </div>
         <div className="w-1/2 bg-white p-6 rounded-lg shadow-md flex flex-col relative z-10">
           <Select
@@ -98,10 +116,10 @@ function SolveProblem() {
             onChange={setLanguage}
             options={languageOptions}
             className="mb-4 z-20"
-            styles={{ menu: (provided) => ({ ...provided, zIndex: 9999 }) }} // Set z-index for the dropdown menu
+            styles={{ menu: (provided) => ({ ...provided, zIndex: 9999 }) }}
           />
           <AceEditor
-            mode={language.value}
+            mode={language.value === 'cpp' ? 'c_cpp' : language.value}
             theme="dracula"
             value={solution}
             onChange={setSolution}
@@ -115,10 +133,18 @@ function SolveProblem() {
           >
             Submit Solution
           </button>
-          {verdict && (
-            <div className={`mt-4 text-${verdict.color}-500`}>
-              {verdict.message}
+          {loading ? (
+            <div className="flex justify-center mt-4">
+              <ClipLoader color="#4A90E2" loading={loading} size={35} />
             </div>
+          ) : (
+            <>
+              {verdict && (
+                <div className={`mt-4 text-${verdict.color}-500 font-bold`}>
+                  {verdict.message}
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>
