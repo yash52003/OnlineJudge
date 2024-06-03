@@ -97,14 +97,14 @@ const submitSolution = async (req, res) => {
             }
         }
 
-        console.log(results);
-        const solution = new Solution({
-            user: userId,
-            problem: problemId,
-            code,
-            verdict: finalVerdict,
-        });
-        await solution.save();
+        // console.log(results);
+        // const solution = new Solution({
+        //     user: userId,
+        //     problem: problemId,
+        //     code,
+        //     verdict: finalVerdict,
+        // });
+        // await solution.save();
         // console.log("Solution saved to database");
 
         // Delete generated code file after saving solution
