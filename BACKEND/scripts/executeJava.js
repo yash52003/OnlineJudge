@@ -1,21 +1,25 @@
 const fs = require("fs");
 const path = require("path");
-const {exec} = require("child_process");
+const { exec } = require("child_process");
 
-const executeJava = (filepath , inputFilePath) => {
-    const dir = path.dirname(filepath);
-    const filename = path.basename(filepath , '.java');
+const outputPath = path.join(__dirname, '../outputs');
 
-    return new Promise((resolve , reject) => {
-        exec(`javac "${filepath}" && java -cp "${dir}" ${filename} < "${inputFilePath}"` , {
-            shell : 'cmd.exe'
-        },
-        (error , stdout , stderr) => {
-            if(error){
-                return reject({error : error.message , stderr});
+if (!fs.existsSync(outputPath)) {
+    fs.mkdirSync(outputPath, { recursive: true });
+}
+
+const executeJava = (filePath, inputFilePath, timeout = 10000) => {
+    const dir = path.dirname(filePath);
+    const filename = path.basename(filePath, '.java');
+
+    return new Promise((resolve, reject) => {
+        const command = `javac "${filePath}" && java -cp "${dir}" ${filename} < "${inputFilePath}"`;
+        exec(command, { timeout }, (error, stdout, stderr) => {
+            if (error) {
+                return reject({ error: error.message, stderr });
             }
-            if(stderr){
-                return reject({error : stderr});
+            if (stderr) {
+                return reject({ error: stderr });
             }
             resolve(stdout);
         });
@@ -24,4 +28,4 @@ const executeJava = (filepath , inputFilePath) => {
 
 module.exports = {
     executeJava,
-}
+};

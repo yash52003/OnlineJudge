@@ -52,7 +52,7 @@ exports.signup = async (req , res) => {
         const user = await User.create({
             name , email , role ,  password : hashPassword , ProblemList : [],
         })
-
+        
         return res.status(200).json({
             success : true,
             message : "User Created Success",

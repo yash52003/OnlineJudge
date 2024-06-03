@@ -4,7 +4,6 @@ const { v4: uuid } = require("uuid");
 
 const dirCodes = path.join(__dirname, '../codes');
 
-// Ensure that all necessary directories exist
 const createLanguageDirs = () => {
     const languages = ['cpp', 'java', 'python'];
     languages.forEach(lang => {
@@ -19,13 +18,14 @@ const createLanguageDirs = () => {
 createLanguageDirs();
 
 const generateFile = (language, code) => {
+    console.log(`Generating file for language: ${language}`);
+
     const jobId = uuid();
     const filename = `${jobId}.${language}`;
     const filePath = path.join(dirCodes, language, filename);
 
-    console.log(`Writing file to path: ${filePath}`);
+    console.log(`File will be saved at: ${filePath}`);
 
-    // Ensure the directory exists before writing the file
     const dirPath = path.dirname(filePath);
     if (!fs.existsSync(dirPath)) {
         fs.mkdirSync(dirPath, { recursive: true });
@@ -33,9 +33,9 @@ const generateFile = (language, code) => {
     }
 
     fs.writeFileSync(filePath, code);
+    console.log(`File successfully generated`);
+
     return filePath;
 };
 
-module.exports = {
-    generateFile,
-};
+module.exports = { generateFile };

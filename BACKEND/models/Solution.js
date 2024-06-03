@@ -21,7 +21,7 @@ const solutionSchema = new mongoose.Schema({
 
     verdict: {
         type : String,
-        enum: ['Accepted' , 'Wrong Answer' , 'Runtime Error' , 'Compilation Error'],
+        // enum: ['Accepted' , 'Wrong Answer' , 'Runtime Error' , 'Compilation Error'],
         required : true,
     },
 
@@ -33,5 +33,3 @@ const solutionSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("Solution" , solutionSchema);
-
-
