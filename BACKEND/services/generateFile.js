@@ -21,7 +21,7 @@ const generateFile = (language, code) => {
     console.log(`Generating file for language: ${language}`);
 
     const jobId = uuid();
-    const filename = `${jobId}.${language}`;
+    const filename = language === 'java' ? 'Main.java' : `${jobId}.${language}`;
     const filePath = path.join(dirCodes, language, filename);
 
     console.log(`File will be saved at: ${filePath}`);
@@ -38,4 +38,6 @@ const generateFile = (language, code) => {
     return filePath;
 };
 
-module.exports = { generateFile };
+module.exports = {
+    generateFile,
+};

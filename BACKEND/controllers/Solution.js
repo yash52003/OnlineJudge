@@ -15,8 +15,10 @@ const submitSolution = async (req, res) => {
         const { id: problemId } = req.params;
         const userId = req.user.id;
 
+        console.log("Received submission:", { language, code, problemId, userId });
+
         if (!code || !language) {
-            // console.log("Code or language is missing");
+            console.log("Code or language is missing");
             return res.status(400).json({
                 success: false,
                 error: "Code or language is missing",
@@ -25,7 +27,7 @@ const submitSolution = async (req, res) => {
 
         const problem = await Problem.findById(problemId).populate('testCases');
         if (!problem) {
-            // console.log("Problem not found");
+            console.log("Problem not found");
             return res.status(404).json({
                 success: false,
                 error: "Problem not found",
@@ -33,7 +35,7 @@ const submitSolution = async (req, res) => {
         }
 
         const filePath = generateFile(language, code);
-        // console.log(`Generated file at ${filePath}`);
+        console.log("Generated file at:", filePath);
         
         const inputOutputPairs = problem.testCases.map(testCase => ({
             input: testCase.input,
@@ -48,26 +50,26 @@ const submitSolution = async (req, res) => {
             const inputDirectory = path.join(__dirname, '../testcases/inputs');
             if (!fs.existsSync(inputDirectory)) {
                 fs.mkdirSync(inputDirectory, { recursive: true });
-                // console.log(`Input directory created: ${inputDirectory}`);
+                console.log("Input directory created:", inputDirectory);
             }
 
             const inputFilePath = path.join(inputDirectory, `${path.basename(filePath, `.${language}`)}_${index}.txt`);
             fs.writeFileSync(inputFilePath, input);
-            // console.log(`Written input to ${inputFilePath}`);
+            console.log("Written input to:", inputFilePath);
 
             try {
                 let execResult;
                 switch (language) {
                     case 'cpp':
-                        // console.log(`Executing C++ file ${filePath} with input ${inputFilePath}`);
+                        console.log(`Executing C++ file ${filePath} with input ${inputFilePath}`);
                         execResult = await executeCpp(filePath, inputFilePath, TIMEOUT_MS);
                         break;
                     case 'python':
-                        // console.log(`Executing Python file ${filePath} with input ${inputFilePath}`);
+                        console.log(`Executing Python file ${filePath} with input ${inputFilePath}`);
                         execResult = await executePython(filePath, inputFilePath, TIMEOUT_MS);
                         break;
                     case 'java':
-                        // console.log(`Executing Java file ${filePath} with input ${inputFilePath}`);
+                        console.log(`Executing Java file ${filePath} with input ${inputFilePath}`);
                         execResult = await executeJava(filePath, inputFilePath, TIMEOUT_MS);
                         break;
                     default:
@@ -75,53 +77,46 @@ const submitSolution = async (req, res) => {
                 }
 
                 execResult = execResult.trim();
-                // console.log(`Execution result: ${execResult}`);
+                console.log("Execution result:", execResult);
                 
                 const verdict = execResult === output.trim() ? "Accepted" : "Wrong Answer";
                 if (verdict !== "Accepted") {
                     finalVerdict = verdict;
-                    failedTestCase = index + 1; // Set the failed test case index
-                    break; // Stop processing further test cases if any one of them fails
+                    failedTestCase = index + 1;
+                    break;
                 }
                 results.push({ input, expectedOutput: output, actualOutput: execResult, verdict });
             } catch (error) {
-                // console.error(`Error executing test case ${index + 1}:`, error);
-                finalVerdict = "Incorrect Code"; // Set final verdict to "Incorrect Code" if there's an actual runtime error
-                failedTestCase = index + 1; // Set the failed test case index
+                console.error(`Error executing test case ${index + 1}:`, error);
+                finalVerdict = "Incorrect Code";
+                failedTestCase = index + 1;
                 results.push({ input, expectedOutput: output, actualOutput: error.message || error.stderr || "Error", verdict: "Incorrect Code" });
-                break; // Stop processing further test cases if there's a runtime error
+                break;
             } finally {
                 // Delete input file after each iteration
                 fs.unlinkSync(inputFilePath);
-                // console.log(`Deleted input file ${inputFilePath}`);
+                console.log("Deleted input file:", inputFilePath);
             }
         }
 
-        // console.log(results);
-        // const solution = new Solution({
-        //     user: userId,
-        //     problem: problemId,
-        //     code,
-        //     verdict: finalVerdict,
-        // });
-        // await solution.save();
-        // console.log("Solution saved to database");
+        console.log("Results:", results);
+        console.log("Final verdict:", finalVerdict);
 
         // Delete generated code file after saving solution
         fs.unlinkSync(filePath);
-        // console.log(`Deleted generated code file ${filePath}`);
+        console.log("Deleted generated code file:", filePath);
 
         // Clean up output directory
         const outputFiles = fs.readdirSync(path.join(__dirname, '../outputs'));
         outputFiles.forEach(file => {
             const filePath = path.join(__dirname, '../outputs', file);
             fs.unlinkSync(filePath);
-            // console.log(`Deleted output file ${filePath}`);
+            console.log("Deleted output file:", filePath);
         });
 
         res.json({ success: true, finalVerdict, failedTestCase, results });
     } catch (error) {
-        // console.error('Error submitting solution:', error);
+        console.error('Error submitting solution:', error);
 
         res.status(500).json({
             success: false,

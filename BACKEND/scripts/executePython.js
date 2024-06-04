@@ -10,14 +10,18 @@ if (!fs.existsSync(outputPath)) {
 
 const executePython = (filePath, inputFilePath, timeout = 10000) => {
     return new Promise((resolve, reject) => {
-        const command = `python "${filePath}" < "${inputFilePath}"`;
+        const command = `python3 "${filePath}" < "${inputFilePath}"`;
+        console.log("Executing command:", command);
         exec(command, { timeout }, (error, stdout, stderr) => {
             if (error) {
+                console.error("Error:", error.message);
                 return reject({ error: error.message, stderr });
             }
             if (stderr) {
+                console.error("Standard error output:", stderr);
                 return reject({ error: stderr });
             }
+            console.log("Execution result:", stdout);
             resolve(stdout);
         });
     });
