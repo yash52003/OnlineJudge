@@ -155,7 +155,7 @@ function EditProblem() {
             </button>
             <button
               type="button"
-              onClick={() => navigate('/admin-dashboard')}
+              onClick={() => navigate('/adminDashboard')}
               className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
             >
               Cancel
