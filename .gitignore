@@ -1,4 +1,7 @@
 node_modules
 BACKEND/node_modules/
 frontend/node_modules/
+BACKEND/.env
+frontend/.env
 .vscode
+keys
