@@ -62,79 +62,6 @@ An online judge platform hosting coding problems and challenges. Users solve a s
 
 
 ## 🎨 Platform Visuals
-### Default Website (Light Theme)
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/Light/landing.png?raw=true" style="width: 300px;"/>
-        <br />
-        <em>Figure 1: Landing page</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/Light/problems.png?raw=true" style="width: 300px;"/>
-        <br />
-        <em>Figure 2: Problems Page</em>
-      </td>
-    </tr>
-        <tr>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/Light/problem-i.png?raw=true" alt="Landing page" style="width: 300px;"/>
-        <br />
-        <em>Figure 3.1: Problems page</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/Light/tags.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 3.2: Problems Tag Filter</em>
-      </td>
-    </tr>
-  </table>
-</div>
-
-### Multi Theme Support Website (Dark Theme)
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/about.png?raw=true" alt="Landing page" style="width: 300px;"/>
-        <br />
-        <em>Figure 1: About Page</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/problem-n.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 2: Problem page</em>
-      </td>
-    </tr>
-        <tr>
-     <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/login.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 3.1: Login</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/register.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 3.2: Register</em>
-      </td>
-    </tr>
-     </tr>
-        <tr>
-     <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/select-tag.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 4: Tag Filter</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/problem-all-submision.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 5: Problem all Submissions</em>
-      </td>
-    </tr>
-  </table>
-</div>
-
 
 ### Different Dashboards for multiple roles 
 <div align="center">
@@ -144,14 +71,14 @@ An online judge platform hosting coding problems and challenges. Users solve a s
       </tr>
     <tr>
       <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboard/profile-user.png?raw=true" alt="Landing page" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/Homepage.png" alt="Landing page" style="width: 300px;"/>
         <br />
-        <em>Figure 1.1: User Profile</em>
+        <em>Homepage</em>
       </td>
       <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboard/submission.png?raw=true" alt="Landing register" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/LoginPage.png" style="width: 300px;"/>
         <br />
-        <em>Figure 1.2: User Submissions</em>
+        <em>LoginPage</em>
       </td>
     </tr>
   </table>
@@ -159,100 +86,47 @@ An online judge platform hosting coding problems and challenges. Users solve a s
 
 <div align="center">
   <table>
-     <tr>
-    <th align="center">Admin Dashboard</th>
-      </tr>
    <tr>
      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboardadmin/problems.png?raw=true" alt="Landing register" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/SingupPage.png" alt="Landing register" style="width: 300px;"/>
         <br />
-        <em>Figure 2.1: Admin Problems</em>
+        <em>Signup Page</em>
       </td>
       <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboardadmin/create.png?raw=true" alt="Landing register" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/UserDashboard.png" style="width: 300px;"/>
         <br />
-        <em>Figure 2.2: Admin Create Problem</em>
+        <em>User Dashboard</em>
       </td>
     </tr>
     <tr>
            <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboardadmin/edit.png?raw=true" alt="Landing register" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/SolveProblemPage.png" alt="Landing register" style="width: 300px;"/>
         <br />
-        <em>Figure 2.3: Admin Edit Problem</em>
+        <em>Solve Problem</em>
       </td>
           </td>
            <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/dark/dashboardadmin/submissions.png?raw=true" alt="Landing register" style="width: 300px;"/>
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/AdminCrud.png" alt="Landing register" style="width: 300px;"/>
         <br />
-        <em>Figure 2.4: Admin Submissions of Problem</em>
+        <em>Admin Dashboard</em>
       </td>
     </tr>
-  </table>
-</div>
-
-
-### Submissions in multiple Languages
-<div align="center">
-  <table>
     <tr>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/lang/c.png?raw=true" alt="Landing page" style="width: 300px;"/>
+           <td align="center">
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/CreateProblemPage.png" alt="Landing register" style="width: 300px;"/>
         <br />
-        <em>Figure 1: C</em>
+        <em>Create Problem</em>
       </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/lang/cpp.png?raw=true" alt="Landing register" style="width: 300px;"/>
+          </td>
+           <td align="center">
+        <img src="https://github.com/yash52003/OnlineJudge/blob/main/assets/Edit.CreateProblem.png" style="width: 300px;"/>
         <br />
-        <em>Figure 2: C++</em>
-      </td>
-    </tr>
-        <tr>
-     <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/lang/java.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 3: java</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/lang/python.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 4: Python</em>
+        <em>Edit Problem</em>
       </td>
     </tr>
   </table>
 </div>
 
-    
-### Supports multiple theme in code editor
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/theme/vs-dark.png?raw=true" alt="Landing page" style="width: 300px;"/>
-        <br />
-        <em>Figure 1: vs-dark</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/theme/rose.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 2: cd-rose (self defined)</em>
-      </td>
-    </tr>
-        <tr>
-     <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/theme/hc-black.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 3: hc-black</em>
-      </td>
-      <td align="center">
-        <img src="https://github.com/DeveHk/OJ-Project-MERN/blob/main/Assets/OJ/xl/theme/game.png?raw=true" alt="Landing register" style="width: 300px;"/>
-        <br />
-        <em>Figure 4: cd-game (self defined)</em>
-      </td>
-    </tr>
-  </table>
-</div>
-
-### Highly responsive UI
 <div align="center">
   <table>
     <tr>
